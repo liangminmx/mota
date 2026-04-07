@@ -19,7 +19,7 @@
 
 1. 访问 https://github.com/new
 2. 填写仓库信息：
-   - Repository name: `mota-dockerized` (或自定义名称)
+   - Repository name: `mota` (或自定义名称)
    - Description: "魔塔游戏Docker化版本"
    - 选择 Public 或 Private
    - **不要**添加 README.md、.gitignore 或 license（我们已有）
@@ -37,7 +37,7 @@ chmod +x publish.sh
 ./publish.sh --token YOUR_GITHUB_TOKEN --repo 用户名/仓库名
 
 # 示例：
-./publish.sh --token ghp_xxxxxxxxxxxxx --repo liangminmx/mota-dockerized
+./publish.sh --token ghp_xxxxxxxxxxxxx --repo liangminmx/mota
 ```
 
 ### 方案二：手动发布

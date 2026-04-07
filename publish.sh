@@ -13,9 +13,9 @@ NC='\033[0m' # No Color
 
 # 默认值
 GITHUB_TOKEN=""
-REPO_NAME="mota-dockerized"
+REPO_NAME="mota"
 GITHUB_USER="liangminmx"
-IMAGE_NAME="mota-dockerized"
+IMAGE_NAME="mota"
 TAG="latest"
 
 # 显示帮助信息
@@ -27,9 +27,9 @@ show_help() {
 
 选项:
   -t, --token TOKEN       GitHub Token (必需)
-  -r, --repo REPO         GitHub仓库名 [用户名/仓库名] (默认: liangminmx/mota-dockerized)
+  -r, --repo REPO         GitHub仓库名 [用户名/仓库名] (默认: liangminmx/mota)
   -u, --user USER         GitHub用户名 (默认: liangminmx)
-  -i, --image IMAGE       Docker镜像名 (默认: mota-dockerized)
+  -i, --image IMAGE       Docker镜像名 (默认: mota)
   --tag TAG              Docker标签 (默认: latest)
   -h, --help             显示帮助信息
 
