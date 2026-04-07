@@ -127,6 +127,36 @@ docker-compose up -d
 sudo systemctl status docker
 ```
 
+## 📋 快速导航
+
+### 主要配置文件
+- **docker-compose.yml** - [完整配置详情](#docker-composeyml-完整配置) ⬇️
+- **.env** - 环境变量配置
+- **Dockerfile** - Docker构建配置
+- **nginx.conf** - nginx优化配置
+
+### 一键命令
+```bash
+# 完整部署
+./deploy.sh
+
+# 测试部署
+./test-deployment.sh
+
+# 清理资源
+./cleanup.sh
+
+# 发布到GitHub
+./publish.sh --token TOKEN --repo liangminmx/mota
+```
+
+### 部署方式
+1. **本地部署** - 使用docker-compose
+2. **云部署** - 使用GitHub Packages镜像
+3. **CI/CD** - 自动构建和发布
+
+---
+
 ## ✅ 已完成的工作
 
 ### 已完成步骤:
