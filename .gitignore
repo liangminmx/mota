@@ -8,6 +8,7 @@ logs/
 # 环境特定文件
 .env.local
 .env.*.local
+.env*.local
 
 # 编辑器文件
 .vscode/

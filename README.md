@@ -127,6 +127,61 @@ docker-compose up -d
 sudo systemctl status docker
 ```
 
+## 🚀 发布到GitHub和Docker镜像
+
+### 发布到GitHub仓库
+
+1. **在GitHub上创建新仓库**
+   - 访问 https://github.com/new
+   - 仓库名称: `mota-dockerized` (建议)
+   - 描述: "魔塔游戏Docker化版本"
+   - 选择公共或私有
+   - 不初始化README.md (因为我们已有)
+
+2. **推送代码到GitHub**
+   ```bash
+   # 添加远程仓库
+   git remote add origin git@github.com:liangminmx/mota-dockerized.git
+   
+   # 推送代码
+   git push -u origin main
+   ```
+
+### 发布Docker镜像到GitHub Packages
+
+1. **登录GitHub Container Registry**
+   ```bash
+   # 创建GitHub Token (需要有 write:packages 权限)
+   # 然后登录
+   echo $GITHUB_TOKEN | docker login ghcr.io -u liangminmx --password-stdin
+   ```
+
+2. **标记并推送镜像**
+   ```bash
+   # 标记镜像
+   docker tag mota-game:latest ghcr.io/liangminmx/mota-dockerized:latest
+   
+   # 推送镜像
+   docker push ghcr.io/liangminmx/mota-dockerized:latest
+   ```
+
+3. **使用GitHub镜像**
+   ```bash
+   # 拉取镜像
+   docker pull ghcr.io/liangminmx/mota-dockerized:latest
+   
+   # 运行容器
+   docker run -d -p 8080:80 ghcr.io/liangminmx/mota-dockerized:latest
+   ```
+
+### 自动化脚本
+
+提供了自动化发布脚本 `publish.sh`:
+
+```bash
+./publish.sh --token YOUR_GITHUB_TOKEN --repo liangminmx/mota-dockerized
+```
+
 ## 扩展功能（可选）
 
 如需添加以下功能，请自行修改：
