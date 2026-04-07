@@ -1,0 +1,28 @@
+# Docker相关
+logs/
+
+# 游戏源文件（可以保留，但原zip文件可以忽略）
+*.zip
+*.tar.gz
+
+# 环境特定文件
+.env.local
+.env.*.local
+
+# 编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+/tmp/
+/temp/
+
+# 构建产物
+docker-compose.override.yml

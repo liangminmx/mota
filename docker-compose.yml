@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mota-game:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME:-mota-game}
+    hostname: mota-game
+    ports:
+      - "${GAME_PORT:-8080}:80"
+    restart: unless-stopped
+    networks:
+      - mota-network
+    environment:
+      - NGINX_HOST=localhost
+    volumes:
+      - ./logs:/var/log/nginx
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+networks:
+  mota-network:
+    driver: bridge
+    name: mota-network

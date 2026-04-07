@@ -1,0 +1,142 @@
+# 魔塔游戏 Docker 化部署
+
+这是魔塔游戏的Docker化版本，基于nginx提供静态文件服务。
+
+## 快速开始
+
+### 前提条件
+
+- 安装 [Docker](https://docs.docker.com/get-docker/)
+- 安装 [Docker Compose](https://docs.docker.com/compose/install/)
+
+### 部署步骤
+
+1. **进入项目目录**
+   ```bash
+   cd /vol1/1000/文件/github/mota
+   ```
+
+2. **一键部署**
+   ```bash
+   ./deploy.sh
+   ```
+
+   或者手动部署：
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **访问游戏**
+   打开浏览器访问：http://localhost:8080
+
+## 文件结构
+
+```
+/vol1/1000/文件/github/mota/
+├── mt/                    # 游戏源文件
+│   ├── index.html        # 主页面
+│   ├── main.js           # 主逻辑
+│   ├── styles.css        # 样式表
+│   ├── libs/             # 游戏库文件
+│   ├── images/           # 图片资源
+│   ├── animates/         # 动画资源
+│   └── ...
+├── Dockerfile            # Docker构建文件
+├── docker-compose.yml    # Docker编排配置
+├── deploy.sh             # 一键部署脚本
+├── test-deployment.sh    # 部署测试脚本
+├── cleanup.sh            # 清理脚本
+├── nginx.conf            # nginx配置文件
+├── .env                  # 环境变量配置
+└── README.md             # 本文档
+```
+
+## 配置说明
+
+### 端口配置
+
+默认将容器的80端口映射到主机的8080端口，如需修改，请编辑 `docker-compose.yml`：
+
+```yaml
+ports:
+  - "自定义端口:80"  # 例如: "3000:80"
+```
+
+### 自定义nginx配置
+
+如需自定义nginx配置，可以创建 `nginx.conf` 文件并修改Dockerfile：
+
+```dockerfile
+COPY nginx.conf /etc/nginx/nginx.conf
+```
+
+## 管理命令
+
+### 启动服务
+```bash
+docker-compose up -d
+```
+
+### 停止服务
+```bash
+docker-compose down
+```
+
+### 查看日志
+```bash
+docker-compose logs -f
+```
+
+### 重启服务
+```bash
+docker-compose restart
+```
+
+### 更新服务（重新构建）
+```bash
+docker-compose build --no-cache
+docker-compose up -d
+```
+
+## 技术实现
+
+- **基础镜像**: nginx:alpine（轻量级）
+- **工作目录**: /usr/share/nginx/html
+- **服务端口**: 80（容器内）
+- **数据持久化**: 无（纯静态游戏，无需数据库）
+- **游戏保存**: 使用浏览器localStorage保存游戏进度
+
+## 注意事项
+
+1. 游戏为纯前端实现，无需后端服务器
+2. 浏览器关闭后游戏进度仍会保留（localStorage）
+3. 不同浏览器/设备间的游戏进度不共享
+4. 如需要多用户或云端保存功能，需额外开发后端服务
+
+## 故障排除
+
+### 端口占用
+如果8080端口已被占用，请修改 `docker-compose.yml` 中的端口映射。
+
+### 权限问题
+确保对游戏文件有读取权限。
+
+### Docker问题
+确保Docker服务正常运行：
+```bash
+sudo systemctl status docker
+```
+
+## 扩展功能（可选）
+
+如需添加以下功能，请自行修改：
+
+1. **HTTPS支持**: 添加SSL证书，配置nginx支持HTTPS
+2. **CDN加速**: 配置CDN加速静态资源
+3. **多语言支持**: 修改游戏界面支持多语言
+4. **用户系统**: 添加后端服务支持用户注册和云存档
+
+## 许可证
+
+游戏源文件版权归原作者所有。
+Docker化部署文件遵循MIT许可证。
